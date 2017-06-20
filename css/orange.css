@@ -1129,3 +1129,141 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /*# sourceMappingURL=orange.css.map */
+
+/* fauxne */
+#phone {
+  max-width: 20em;
+  min-width: 18em;
+  height: 36em;
+  margin: auto;
+  border-radius: 3em;
+  border: 1em solid #fff;
+  border-top-width: 4em;
+  border-bottom-width: 4.5em;
+  position: relative;
+  overflow: hidden;
+  background-color: #eaeaea;
+
+}
+
+/* Conversation container */
+#conversation {
+  padding: 1em;
+  font-family: sans-serif;
+  position: absolute;
+  bottom: 0;
+}
+
+/* Generic message styles */
+.message, .pending-message {
+  padding: .65em .9em;
+  margin: .5em 0;
+  background-color: limegreen;
+  clear: both;
+  position: relative;
+  border-radius: 1.3em;
+  font-size: 0;
+  line-height: 1.3em;
+  transition: all .15s cubic-bezier(0.175, 0.885, 0.32, 1.275); /*would have liked a more detailed animation, but this was quicker */
+}
+
+.message.show, .pending .pending-message { 
+  font-size: 1em;
+}
+
+/* Sent vs. Received */
+.sent {
+  float: right;
+  color: #fff;
+}
+
+.received, .pending-message { 
+  float: left;
+  background-color: #ccc;
+}
+
+/* Pending message ellipsis thingy */
+
+.pending-message {
+  color: #666;
+  padding: .5em .75em;
+  position: relative;
+}
+
+.pending-message::after {
+  content: "";
+  width: .9em;
+  height: .9em;
+  background-color: #ccc;
+  border-radius: 10em;
+  position: absolute;
+  transition: all .4s;
+  bottom: 100%;
+  left: -.5em;
+}
+
+.pending .pending-message::after {
+  left: -.15em;
+  bottom: -.15em;
+  box-shadow: -.55em .55em 0 -.25em #ccc;
+}
+
+.ellipsis {
+  display: inline-block;
+  width: .5em;
+  height: .5em;
+  background: #bbb;
+  border-radius: 10em;
+  animation-name: wait;
+  animation-duration: .75s;
+  animation-iteration-count: infinite;
+}
+
+.ellipsis:nth-child(1){
+  animation-delay: .3s;
+}
+
+.ellipsis:nth-child(2){
+  animation-delay: .6s;
+}
+
+@keyframes wait {
+    from {background-color: #333;}
+    to {background-color: #666;}
+}
+
+/* Hidden labels for accessibility. This makes it read like a script. */
+.sent::before, .received::before {
+  position: fixed;
+  left: -999em;
+}
+
+.sent::before {
+  content: "Sent: ";
+}
+
+.received::before {
+  content: "Received: ";
+}
+
+/* Tails */
+.message::after {
+  content:"";
+  width: 1em;
+  height: 1em;
+  display:  block;
+  position: absolute;
+  bottom: 0;
+}
+
+.received::after {
+  right: 100%;
+  border-radius: 0 0 1em 0;
+  box-shadow: .5em 0 #ccc;
+}
+
+.sent::after {
+  border-radius: 0 0 0 1em;
+  box-shadow: -.5em 0 limegreen;
+  left: 100%;
+}
