@@ -456,3 +456,41 @@
 
 
 }());
+
+
+var messenger = {
+  bubbles : document.getElementsByClassName('message'),
+  counter : 0,
+  
+  bubbleTimer : function(){
+    var t = this;
+    var x = setTimeout(function(){
+        t.showBubbles();
+    }, (Math.random() * 3000) + 1000); //random time between 1 and 3 seconds
+  },
+  
+  showBubbles : function(){
+    if(this.bubbles[this.counter].classList.contains('received') && !document.getElementById('conversation').classList.contains('pending')){
+      document.getElementById('conversation').classList.add('pending');
+      this.bubbleTimer();
+     }else{
+       if(this.counter < this.bubbles.length){
+         this.bubbles[this.counter].classList.add('show');
+         document.getElementById('conversation').classList.remove('pending')
+         this.counter++;
+         this.bubbleTimer(); 
+       }
+    }
+  }, // end showBubbles
+  
+  rerun : function(){
+    for(var i = 0; i < this.bubbles.length; i++){
+      this.bubbles[i].classList.remove('show');
+    }
+    this.counter = 0;
+    this.showBubbles();
+  }
+} // end messenger
+
+messenger.showBubbles();
+document.getElementById('rerun').onclick = function(){ messenger.rerun(); };
